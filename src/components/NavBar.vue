@@ -13,7 +13,9 @@
           </b-navbar-nav>
 
           <!-- Right aligned nav items -->
-          <b-navbar-nav class="ms-auto">
+          <b-navbar-nav class="ml-auto">
+            <b-avatar src="https://placekitten.com/300/300"></b-avatar>
+
             <b-nav-item-dropdown text="GolemUser" right>
               <b-dropdown-item href="#">Profile</b-dropdown-item>
               <b-dropdown-item href="#">Wallet</b-dropdown-item>
