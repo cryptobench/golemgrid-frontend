@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <Navigation></Navigation>
-    <router-view />
+    <b-container class="mt-3">
+      <router-view />
+    </b-container>
   </div>
 </template>
 
@@ -21,5 +23,9 @@ export default {
 
 .navbar-light .navbar-brand {
   color: white !important;
+}
+
+.card {
+  box-shadow: 0 2px 4px rgb(126 142 177 / 10%);
 }
 </style>
