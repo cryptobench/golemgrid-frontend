@@ -3,6 +3,15 @@ import App from "./App.vue"
 import router from "./router"
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue"
 
+import axios from "axios"
+
+Vue.use({
+  install(Vue) {
+    Vue.prototype.$api = axios.create({
+      baseURL: "https://api.staging.golemgrid.com/v1/",
+    })
+  },
+})
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap-vue/dist/bootstrap-vue.css"
