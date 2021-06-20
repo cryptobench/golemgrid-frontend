@@ -115,7 +115,7 @@ export default {
       borderright: 0,
       borderup: 0,
       borderdown: 0,
-      compositing: False,
+      compositing: false,
       output: "PNG",
       frames: 1,
       samples: 100,
