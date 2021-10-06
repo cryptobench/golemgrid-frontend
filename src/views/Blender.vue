@@ -143,7 +143,8 @@ export default {
           },
         })
         .then((res) => {
-          console.log(res)
+          console.log(res.data.task_id)
+          this.$router.push({ name: "taskinfo", params: { id: res.data.task_id } })
         })
         .catch((error) => {
           // error.response.status Check status code
