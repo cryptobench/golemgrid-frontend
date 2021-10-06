@@ -8,7 +8,7 @@ import axios from "axios"
 Vue.use({
   install(Vue) {
     Vue.prototype.$api = axios.create({
-      baseURL: "http://api:8002/v1/",
+      baseURL: "http://api.staging.golemgrid.com:8002/v1/",
     })
   },
 })
