@@ -8,8 +8,9 @@
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <b-nav-item href="#">Dashboard</b-nav-item>
-            <b-nav-item href="#">Compute Engine</b-nav-item>
+            <router-link to="/" exact>Dashboard</router-link>
+
+            <router-link to="about" exact>About</router-link>
           </b-navbar-nav>
 
           <!-- Right aligned nav items -->
