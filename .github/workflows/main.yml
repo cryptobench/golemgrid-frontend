@@ -34,4 +34,4 @@ jobs:
                 git checkout staging
                 cd ..
                 docker-compose -f docker-compose-prod.yml build frontend
-                docker service update --force --image frontend_golemgrid:latest staginggolemgrid_frontend
+                docker service update --force --image frontend_golemgrid:latest golemgrid-backend_frontend
