@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navigation></Navigation>
+    <Navigation class="z-50"></Navigation>
     <router-view />
   </div>
 </template>
@@ -15,11 +15,13 @@ export default {
 }
 </script>
 <style>
-.navbar-light .navbar-nav .nav-link {
-  color: white !important;
-}
-
-.navbar-light .navbar-brand {
-  color: white !important;
-}
+/* Overflow-x causes extra scroll at bottom of page. Not sure why currently.
+html,
+body {
+  width: 100%;
+  height: 100vw;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
+} */
 </style>
