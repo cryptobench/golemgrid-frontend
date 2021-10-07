@@ -78,7 +78,7 @@ export default {
   methods: {
     task_data() {
       axios
-        .get("http://localhost:8002/v1/task/" + this.$route.params.id, {})
+        .get("https://api.staging.golemgrid.com/v1/task/" + this.$route.params.id, {})
         .then((res) => {
           console.log(res.data)
           this.task_output = res.data
@@ -93,7 +93,7 @@ export default {
     },
     subtask_data() {
       axios
-        .get("http://localhost:8002/v1/subtask/" + this.$route.params.id, {})
+        .get("https://api.staging.golemgrid.com/v1/subtask/" + this.$route.params.id, {})
         .then((res) => {
           console.log(res.data)
           this.subtask_output = res.data
