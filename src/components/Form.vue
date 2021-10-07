@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="mt-10 sm:mt-0">
-      <div class="md:grid md:grid-cols-3 md:gap-6">
-        <div class="mt-5 md:mt-0 md:col-span-2">
+    <div class="mt-20 sm:mt-4">
+      <div class="md:grid md:grid-cols-8 md:gap-6">
+        <div class="mt-5 md:mt-0 md:col-span-6 md:col-start-2 ">
           <form enctype="multipart/form-data" v-on:submit.prevent="submitForm">
             <div class="shadow overflow-hidden sm:rounded-md">
               <div class="px-4 py-5 bg-white sm:p-6">
@@ -31,7 +31,7 @@
                         <div class="flex text-sm text-gray-600">
                           <label
                             for="file"
-                            class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                            class="relative cursor-pointer bg-white rounded-md font-medium text-golemblue hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                           >
                             <span>Upload a file</span>
                             <input id="file" ref="file" name="file" type="file" v-on:change="handleFileUpload()" class="sr-only" />
@@ -157,7 +157,7 @@
                   <button
                     @click="open = !open"
                     type="submit"
-                    class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    class="w-full py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-golemblue hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Submit
                   </button>
