@@ -30,8 +30,8 @@ jobs:
             port: ${{ secrets.PORT }}
             script: |
                 cd golemgrid-backend/golemgrid-frontend
-                git pull https://github.com/cryptobench/golemgrid-frontend staging
                 git checkout staging
+                git pull
                 cd ..
                 docker-compose -f docker-compose-prod.yml build frontend
                 docker service update --force --image frontend_golemgrid:latest golemgrid-backend_frontend
