@@ -77,39 +77,47 @@ export default {
     }
   },
   created() {
-    this.interval = setInterval(() => this.subtask_data(), 2000)
-    this.interval = setInterval(() => this.task_data(), 2000)
+    this.interval1 = setInterval(() => this.subtask_data(), 2000)
+    this.interval2 = setInterval(() => this.task_data(), 2000)
   },
   methods: {
     task_data() {
-      this.axios
-        .get("task/" + this.$route.params.id, {})
-        .then((res) => {
-          console.log(res.data)
-          this.task_output = res.data
-        })
-        .catch((error) => {
-          // error.response.status Check status code
-          console.log(error.response)
-        })
-        .finally(() => {
-          //Perform action in always
-        })
+      if (this.task_output.status == "finished") {
+        clearInterval(this.interval1)
+      } else {
+        this.axios
+          .get("task/" + this.$route.params.id, {})
+          .then((res) => {
+            console.log(res.data)
+            this.task_output = res.data
+          })
+          .catch((error) => {
+            // error.response.status Check status code
+            console.log(error.response)
+          })
+          .finally(() => {
+            //Perform action in always
+          })
+      }
     },
     subtask_data() {
-      this.axios
-        .get("subtask/" + this.$route.params.id, {})
-        .then((res) => {
-          console.log(res.data)
-          this.subtask_output = res.data
-        })
-        .catch((error) => {
-          // error.response.status Check status code
-          console.log(error.response)
-        })
-        .finally(() => {
-          //Perform action in always
-        })
+      if (this.task_output.status == "finished") {
+        clearInterval(this.interval2)
+      } else {
+        this.axios
+          .get("subtask/" + this.$route.params.id, {})
+          .then((res) => {
+            console.log(res.data)
+            this.subtask_output = res.data
+          })
+          .catch((error) => {
+            // error.response.status Check status code
+            console.log(error.response)
+          })
+          .finally(() => {
+            //Perform action in always
+          })
+      }
     },
   },
 }
