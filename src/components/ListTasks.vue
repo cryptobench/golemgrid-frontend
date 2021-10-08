@@ -59,16 +59,14 @@
 <script>
 import { InformationCircleIcon, ExternalLinkIcon } from "@heroicons/vue/solid"
 
-const tasks = []
-
 export default {
   components: {
     InformationCircleIcon,
     ExternalLinkIcon,
   },
-  setup() {
+  data() {
     return {
-      tasks,
+      tasks: [],
     }
   },
   created() {
