@@ -6,7 +6,7 @@ import Blender from "../views/Blender.vue"
 const routes = [
   {
     path: "/blender",
-    name: "Home",
+    name: "blender",
     component: Blender,
   },
   {

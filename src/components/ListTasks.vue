@@ -3,10 +3,20 @@
   <div class="mt-20 sm:mt-4">
     <div class="md:grid md:grid-cols-8 md:gap-6">
       <div class="mt-5 md:mt-0 md:col-span-6 md:col-start-2 ">
+        <div class="mt-5 md:mt-0 md:col-span-6 md:col-start-2 ">
+          <button
+            type="button"
+            @click="createtask"
+            class="inline-flex items-center mt-1 mb-2 px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-golemblue hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            <PlusIcon class="-ml-1 mr-3 h-5 w-5" aria-hidden="true" />
+            Start new teask
+          </button>
+        </div>
         <div class="bg-white shadow overflow-hidden sm:rounded-md">
           <ul role="list" class="divide-y divide-gray-200">
             <li v-for="task in tasks" :key="task.unique_id">
-              <a @click="onWrapperClick(task.unique_id)" class="block hover:bg-gray-50 cursor-pointer">
+              <a @click="taskredirect(task.unique_id)" class="block hover:bg-gray-50 cursor-pointer">
                 <div class="px-4 py-4 sm:px-6">
                   <div class="flex items-center justify-between">
                     <p class="text-sm font-medium text-indigo-600 truncate">
@@ -57,12 +67,13 @@
 </template>
 
 <script>
-import { InformationCircleIcon, ExternalLinkIcon } from "@heroicons/vue/solid"
+import { InformationCircleIcon, ExternalLinkIcon, PlusIcon } from "@heroicons/vue/solid"
 
 export default {
   components: {
     InformationCircleIcon,
     ExternalLinkIcon,
+    PlusIcon,
   },
   data() {
     return {
@@ -84,8 +95,11 @@ export default {
       })
   },
   methods: {
-    onWrapperClick(taskid) {
+    taskredirect(taskid) {
       this.$router.push({ name: "taskinfo", params: { id: taskid } })
+    },
+    createtask() {
+      this.$router.push({ name: "blender" })
     },
   },
 }
