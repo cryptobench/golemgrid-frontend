@@ -34,7 +34,7 @@
                             class="relative cursor-pointer bg-white rounded-md font-medium text-golemblue hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                           >
                             <span>Upload a file</span>
-                            <input id="file" ref="file" name="file" type="file" v-on:change="handleFileUpload()" class="sr-only" />
+                            <input required id="file" ref="file" name="file" type="file" v-on:change="handleFileUpload()" class="sr-only" />
                           </label>
                           <p class="pl-1">or drag and drop</p>
                         </div>
@@ -47,6 +47,7 @@
                   <div class="col-span-6 sm:col-span-2">
                     <label for="resolution_width" class="block text-sm font-medium text-gray-700">Resolution Width</label>
                     <input
+                      required
                       type="number"
                       name="resolution_width"
                       id="resolution_width"
@@ -59,6 +60,7 @@
                   <div class="col-span-6 sm:col-span-2">
                     <label for="resolution_height" class="block text-sm font-medium text-gray-700">Resolution Height</label>
                     <input
+                      required
                       type="number"
                       name="resolution_height"
                       id="resolution_height"
@@ -71,6 +73,7 @@
                   <div class="col-span-6 sm:col-span-1">
                     <label for="samples" class="block text-sm font-medium text-gray-700">Samples</label>
                     <input
+                      required
                       type="number"
                       name="samples"
                       id="samples"
@@ -83,6 +86,7 @@
                   <div class="col-span-6 sm:col-span-1">
                     <label for="frames" class="block text-sm font-medium text-gray-700">Frames</label>
                     <input
+                      required
                       type="number"
                       name="frames"
                       id="frames"
@@ -95,6 +99,7 @@
                   <div class="col-span-6 sm:col-span-1">
                     <label for="format" class="block text-sm font-medium text-gray-700">Output Format</label>
                     <select
+                      required
                       id="format"
                       name="format"
                       autocomplete="format"
@@ -109,6 +114,7 @@
                   <div class="col-span-6 sm:col-span-1">
                     <label for="borderleft" class="block text-sm font-medium text-gray-700">Border left</label>
                     <input
+                      required
                       type="number"
                       name="borderleft"
                       id="borderleft"
@@ -120,6 +126,7 @@
                   <div class="col-span-6 sm:col-span-1">
                     <label for="borderright" class="block text-sm font-medium text-gray-700">Border right</label>
                     <input
+                      required
                       type="number"
                       name="borderright"
                       id="borderright"
@@ -131,6 +138,7 @@
                   <div class="col-span-6 sm:col-span-1">
                     <label for="borderup" class="block text-sm font-medium text-gray-700">Border up</label>
                     <input
+                      required
                       type="number"
                       name="borderup"
                       id="borderup"
@@ -142,6 +150,7 @@
                   <div class="col-span-6 sm:col-span-1">
                     <label for="borderdown" class="block text-sm font-medium text-gray-700">Border down</label>
                     <input
+                      required
                       v-model="borderdown"
                       type="number"
                       name="borderdown"
@@ -155,7 +164,6 @@
               <div class="col-span-6 sm:col-span-6">
                 <div class="px-4 py-3 bg-gray-50 sm:px-6">
                   <button
-                    @click="open = !open"
                     type="submit"
                     class="w-full py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-golemblue hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
@@ -272,6 +280,7 @@ export default {
   },
   methods: {
     submitForm() {
+      this.open = !this.open
       let data = new FormData() // creates a new FormData object
       data.append("resolutionx", this.resolutionx) // add your file to form data
       data.append("resolutiony", this.resolutiony) // add your file to form data
