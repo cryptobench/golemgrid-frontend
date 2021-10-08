@@ -29,6 +29,11 @@
                         >{{ task.status }}
                       </span>
                       <span
+                        v-if="task.status == 'failed'"
+                        class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-red-100 text-red-800"
+                        >{{ task.status }}
+                      </span>
+                      <span
                         v-else-if="task.status == 'started'"
                         class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800"
                       >

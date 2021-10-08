@@ -13,6 +13,12 @@
               {{ task_output.status }}
             </span>
             <span
+              v-if="task_output.status == 'failed'"
+              class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-red-100 text-red-800"
+            >
+              {{ task_output.status }}
+            </span>
+            <span
               v-else-if="task_output.status == 'started'"
               class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800"
             >
@@ -82,7 +88,7 @@ export default {
   },
   methods: {
     task_data() {
-      if (this.task_output.status == "finished") {
+      if (this.task_output.status == "finished" || this.task_output.status == "failed") {
         clearInterval(this.interval1)
       } else {
         this.axios
@@ -101,7 +107,7 @@ export default {
       }
     },
     subtask_data() {
-      if (this.task_output.status == "finished") {
+      if (this.task_output.status == "finished" || this.task_output.status == "failed") {
         clearInterval(this.interval2)
       } else {
         this.axios
