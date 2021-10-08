@@ -1,16 +1,16 @@
 <template>
   <div class="home">
-    <ListTasks />
+    <Form />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import ListTasks from "@/components/ListTasks.vue"
+import Form from "@/components/Form.vue"
 export default {
   name: "Home",
   components: {
-    ListTasks,
+    Form,
   },
 }
 </script>

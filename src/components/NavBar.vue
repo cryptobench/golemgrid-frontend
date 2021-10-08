@@ -124,7 +124,7 @@ const resources = [
   {
     name: "Blender",
     description: "Render a Blender task",
-    href: "/",
+    href: "/blender",
     icon: FireIcon,
   },
 ]
