@@ -3,7 +3,10 @@ import App from "./App.vue"
 import "./index.css"
 import "./assets/tailwind.css"
 import router from "./router"
+import axios from "axios"
 
-createApp(App)
-  .use(router)
-  .mount("#app")
+const app = createApp(App)
+app.use(router)
+app.config.globalProperties.axios = axios
+app.config.globalProperties.axios.defaults.baseURL = process.env.VUE_APP_BASE_URL
+app.mount("#app")

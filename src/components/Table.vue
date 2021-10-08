@@ -1,27 +1,33 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-  <div class="flex flex-col">
-    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-      <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-        <div class="pb-5 border-b border-gray-200">
-          <div class="-ml-2 -mt-2 flex flex-wrap items-baseline">
-            <h3 class="ml-2 mt-2 text-lg leading-6 font-medium text-gray-900">
-              Blender Task
-            </h3>
-            <p class="ml-2 mt-1 text-sm text-gray-500 truncate">{{ task_output.unique_id }}</p>
-          </div>
-          <!-- This example requires Tailwind CSS v2.0+ -->
-          <span
-            v-if="task_output.status == 'started'"
-            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800"
-          >
-            {{ task_output.status }}
-          </span>
-          <span v-else class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-            {{ task_output.status }}
-          </span>
+  <div>
+    <div class="mt-20 sm:mt-4">
+      <div class="md:grid md:grid-cols-8 md:gap-6">
+        <div class="mt-5 md:mt-0 md:col-span-6 md:col-start-2 ">
+          <h3 class="ml-2 mt-2 text-lg leading-6 font-medium text-gray-900">
+            Blender Task
+            <span
+              v-if="task_output.status == 'Not Started'"
+              class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-red-100 text-red-800"
+            >
+              {{ task_output.status }}
+            </span>
+            <span
+              v-else-if="task_output.status == 'started'"
+              class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800"
+            >
+              {{ task_output.status }}
+            </span>
+            <span
+              v-else-if="task_output.status == 'finished'"
+              class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800"
+            >
+              {{ task_output.status }}
+            </span>
+          </h3>
+          <p class="ml-2 mt-1 text-sm text-gray-500 truncate">{{ task_output.unique_id }}</p>
         </div>
-        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <div class="mt-5 md:mt-0 md:col-span-6 md:col-start-2 ">
           <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
               <tr>
@@ -63,7 +69,6 @@
 </template>
 
 <script>
-import axios from "axios"
 export default {
   data() {
     return {
@@ -77,8 +82,8 @@ export default {
   },
   methods: {
     task_data() {
-      axios
-        .get("https://api.staging.golemgrid.com/v1/task/" + this.$route.params.id, {})
+      this.axios
+        .get("task/" + this.$route.params.id, {})
         .then((res) => {
           console.log(res.data)
           this.task_output = res.data
@@ -92,8 +97,8 @@ export default {
         })
     },
     subtask_data() {
-      axios
-        .get("https://api.staging.golemgrid.com/v1/subtask/" + this.$route.params.id, {})
+      this.axios
+        .get("subtask/" + this.$route.params.id, {})
         .then((res) => {
           console.log(res.data)
           this.subtask_output = res.data
