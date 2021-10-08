@@ -75,7 +75,6 @@ export default {
     this.axios
       .get("tasks/all", {})
       .then((res) => {
-        console.log(res.data)
         this.tasks = res.data
       })
       .catch((error) => {
