@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from "vue-router"
 import Home from "../views/Home.vue"
 import TaskInfo from "../views/TaskInfo.vue"
 import Blender from "../views/Blender.vue"
+import Login from "../views/Login.vue"
+import Register from "../views/Register.vue"
 
 const routes = [
   {
@@ -13,6 +15,16 @@ const routes = [
     path: "/",
     name: "Dashboard",
     component: Home,
+  },
+  {
+    path: "/auth/login",
+    name: "Login",
+    component: Login,
+  },
+  {
+    path: "/auth/signup",
+    name: "Register",
+    component: Register,
   },
   {
     path: "/task/:id",
