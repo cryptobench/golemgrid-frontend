@@ -1,12 +1,21 @@
+import router from "../router"
 class TokenService {
   getLocalRefreshToken() {
     const user = JSON.parse(localStorage.getItem("user"))
-    return user?.refresh
+    if (user) {
+      return user?.refresh
+    } else {
+      router.push({ name: "Login" })
+    }
   }
 
   getLocalAccessToken() {
     const user = JSON.parse(localStorage.getItem("user"))
-    return user?.access
+    if (user) {
+      return user?.access
+    } else {
+      router.push({ name: "Login" })
+    }
   }
 
   updateLocalAccessToken(token) {
