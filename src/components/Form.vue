@@ -295,7 +295,7 @@ export default {
       data.append("samples", this.samples) // add your file to form data
       console.log(">> formData >> ", data)
       api
-        .post("submit/blender", data, {
+        .post("v1/submit/blender", data, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
