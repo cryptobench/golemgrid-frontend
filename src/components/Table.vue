@@ -75,6 +75,7 @@
 </template>
 
 <script>
+import UserService from "../services/user.service"
 export default {
   data() {
     return {
@@ -88,42 +89,25 @@ export default {
   },
   methods: {
     task_data() {
-      if (this.task_output.status == "finished" || this.task_output.status == "failed") {
-        clearInterval(this.interval1)
-      } else {
-        this.axios
-          .get("task/" + this.$route.params.id, {})
-          .then((res) => {
-            console.log(res.data)
-            this.task_output = res.data
-          })
-          .catch((error) => {
-            // error.response.status Check status code
-            console.log(error.response)
-          })
-          .finally(() => {
-            //Perform action in always
-          })
-      }
+      UserService.blenderTaskData(this.$route.params.id).then(
+        (response) => {
+          console.log(response)
+          this.task_output = response.data
+        },
+        (error) => {
+          this.content = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+        }
+      )
     },
     subtask_data() {
-      if (this.task_output.status == "finished" || this.task_output.status == "failed") {
-        clearInterval(this.interval2)
-      } else {
-        this.axios
-          .get("subtask/" + this.$route.params.id, {})
-          .then((res) => {
-            console.log(res.data)
-            this.subtask_output = res.data
-          })
-          .catch((error) => {
-            // error.response.status Check status code
-            console.log(error.response)
-          })
-          .finally(() => {
-            //Perform action in always
-          })
-      }
+      UserService.blenderSubtaskData(this.$route.params.id).then(
+        (response) => {
+          this.subtask_output = response.data
+        },
+        (error) => {
+          this.content = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+        }
+      )
     },
   },
 }

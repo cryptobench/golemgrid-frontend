@@ -7,10 +7,25 @@
 
 <script>
 import Navigation from "@/components/NavBar.vue"
+import EventBus from "@/common/EventBus"
 
 export default {
   components: {
     Navigation,
+  },
+  methods: {
+    logOut() {
+      this.$store.dispatch("auth/logout")
+      this.$router.push("/login")
+    },
+  },
+  mounted() {
+    EventBus.on("logout", () => {
+      this.logOut()
+    })
+  },
+  beforeDestroy() {
+    EventBus.remove("logout")
   },
 }
 </script>

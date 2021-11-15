@@ -239,7 +239,7 @@
 </template>
 
 <script>
-import axios from "axios"
+import api from "@/services/api"
 import { ref } from "vue"
 import { Dialog, DialogOverlay, DialogTitle, TransitionChild, TransitionRoot } from "@headlessui/vue"
 import { CheckIcon } from "@heroicons/vue/outline"
@@ -294,7 +294,7 @@ export default {
       data.append("frames", this.frames) // add your file to form data
       data.append("samples", this.samples) // add your file to form data
       console.log(">> formData >> ", data)
-      axios
+      api
         .post("submit/blender", data, {
           headers: {
             "Content-Type": "multipart/form-data",

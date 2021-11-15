@@ -19,6 +19,9 @@ export const auth = {
         }
       )
     },
+    refreshToken({ commit }, accessToken) {
+      commit("refreshToken", accessToken)
+    },
     logout({ commit }) {
       AuthService.logout()
       commit("logout")
@@ -40,6 +43,10 @@ export const auth = {
     loginSuccess(state, user) {
       state.status.loggedIn = true
       state.user = user
+    },
+    refreshToken(state, accessToken) {
+      state.status.loggedIn = true
+      state.user = { ...state.user, accessToken: accessToken }
     },
     loginFailure(state) {
       state.status.loggedIn = false

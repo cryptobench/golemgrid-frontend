@@ -1,28 +1,27 @@
-import axios from "axios"
-
-const API_URL = "http://localhost:8002"
+import api from "./api"
+import TokenService from "./token.service"
 
 class AuthService {
   login(user) {
-    return this.axios
-      .post(API_URL + "/api/token/", {
+    return api
+      .post("/api/token/", {
         username: user.username,
         password: user.password,
       })
       .then((response) => {
         if (response.data.access) {
-          localStorage.setItem("user", JSON.stringify(response.data))
+          TokenService.setUser(response.data)
         }
         return response.data
       })
   }
 
   logout() {
-    localStorage.removeItem("user")
+    TokenService.removeUser()
   }
 
   register(user) {
-    return axios.post(API_URL + "/auth/register", {
+    return api.post("/auth/register", {
       username: user.username,
       email: user.email,
       password: user.password,

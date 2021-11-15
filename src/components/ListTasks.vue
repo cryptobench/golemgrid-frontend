@@ -73,6 +73,7 @@
 
 <script>
 import { InformationCircleIcon, ExternalLinkIcon, PlusIcon } from "@heroicons/vue/solid"
+import UserService from "../services/user.service"
 
 export default {
   components: {
@@ -83,22 +84,20 @@ export default {
   data() {
     return {
       tasks: [],
+      content: "",
     }
   },
-  created() {
-    this.axios
-      .get("tasks/all", {})
-      .then((res) => {
-        this.tasks = res.data
-      })
-      .catch((error) => {
-        // error.response.status Check status code
-        console.log(error.response)
-      })
-      .finally(() => {
-        //Perform action in always
-      })
+  mounted() {
+    UserService.getTaskOverview().then(
+      (response) => {
+        this.tasks = response.data
+      },
+      (error) => {
+        this.content = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+      }
+    )
   },
+
   methods: {
     taskredirect(taskid) {
       this.$router.push({ name: "taskinfo", params: { id: taskid } })

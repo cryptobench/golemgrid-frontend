@@ -199,7 +199,7 @@ export default {
   },
   created() {
     if (this.loggedIn) {
-      this.$router.push("/profile")
+      this.$router.push("/")
     }
   },
   methods: {
@@ -209,7 +209,7 @@ export default {
       console.log("USER ABOVE")
       this.$store.dispatch("auth/login", this.user).then(
         () => {
-          this.$router.push("/profile")
+          this.$router.push("/")
         },
         (error) => {
           this.loading = false
