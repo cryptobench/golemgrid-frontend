@@ -7,7 +7,7 @@
             <div class="shadow overflow-hidden sm:rounded-md">
               <div class="px-4 py-5 bg-white sm:p-6">
                 <div class="grid grid-cols-6 gap-6">
-                  <div class="col-span-6 sm:col-span-2">
+                  <div class="col-span-6 sm:col-span-3">
                     <label for="firstname" class="block text-sm font-medium text-gray-700">First Name</label>
                     <input
                       required
@@ -19,7 +19,7 @@
                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
-                  <div class="col-span-6 sm:col-span-2">
+                  <div class="col-span-6 sm:col-span-3">
                     <label for="username" class="block text-sm font-medium text-gray-700">lastname</label>
                     <input
                       required
@@ -31,7 +31,7 @@
                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
-                  <div class="col-span-6 sm:col-span-2">
+                  <div class="col-span-6 sm:col-span-3">
                     <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
                     <input
                       required
@@ -44,7 +44,7 @@
                     />
                   </div>
 
-                  <div class="col-span-6 sm:col-span-2">
+                  <div class="col-span-6 sm:col-span-3">
                     <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                     <input
                       required
@@ -57,7 +57,7 @@
                     />
                   </div>
 
-                  <div class="col-span-6 sm:col-span-1">
+                  <div class="col-span-6 sm:col-span-3">
                     <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                     <input
                       required
@@ -69,11 +69,11 @@
                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
-                  <div class="col-span-6 sm:col-span-1">
-                    <label for="password2" class="block text-sm font-medium text-gray-700">Password2</label>
+                  <div class="col-span-6 sm:col-span-3">
+                    <label for="password2" class="block text-sm font-medium text-gray-700">Confirm Password</label>
                     <input
                       required
-                      type="password2"
+                      type="password"
                       name="password2"
                       id="password2"
                       v-model="user.password2"
@@ -204,7 +204,7 @@ export default {
   },
   created() {
     if (this.loggedIn) {
-      this.$router.push("/profile")
+      this.$router.push("/")
     }
   },
   methods: {

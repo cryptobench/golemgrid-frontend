@@ -2,18 +2,18 @@ import api from "./api"
 
 class UserService {
   submitBlender() {
-    return api.get("all")
+    return api.get("v1/all")
   }
 
   getTaskOverview() {
-    return api.get("tasks/all")
+    return api.get("v1/tasks/all")
   }
 
   blenderTaskData(task_id) {
-    return api.get("task/" + task_id)
+    return api.get("v1/task/" + task_id)
   }
   blenderSubtaskData(task_id) {
-    return api.get("subtask/" + task_id)
+    return api.get("v1/subtask/" + task_id)
   }
 }
 
