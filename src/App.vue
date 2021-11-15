@@ -24,7 +24,7 @@ export default {
       this.logOut()
     })
   },
-  beforeDestroy() {
+  beforeUnmount() {
     EventBus.remove("logout")
   },
 }
