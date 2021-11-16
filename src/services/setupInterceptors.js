@@ -39,10 +39,7 @@ const setup = (store) => {
 
             return instance(originalConfig)
           } catch (_error) {
-            if (_error.response.status === 404) {
-              store.dispatch("auth/logout")
-              router.push({ name: "Login" })
-            }
+            router.push({ name: "Login" })
             return Promise.reject(_error)
           }
         }
