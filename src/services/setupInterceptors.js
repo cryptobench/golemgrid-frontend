@@ -39,6 +39,8 @@ const setup = (store) => {
 
             return instance(originalConfig)
           } catch (_error) {
+            this.$store.dispatch("auth/logout")
+            console.log("remove user")
             router.push({ name: "Login" })
             return Promise.reject(_error)
           }

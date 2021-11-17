@@ -83,15 +83,26 @@ export default {
       subtask_output: {},
     }
   },
+
   created() {
-    this.interval1 = setInterval(() => this.subtask_data(), 2000)
-    this.interval2 = setInterval(() => this.task_data(), 2000)
+    UserService.blenderTaskData(this.$route.params.id).then((response) => {
+      this.task_output = response.data
+      if (response.data.status == "finished") {
+        return
+      } else {
+        console.log(this.task_output.status)
+        this.interval2 = setInterval(() => this.task_data(), 2000)
+        this.interval2 = setInterval(() => this.subtask_data(), 2000)
+      }
+    })
+    UserService.blenderSubtaskData(this.$route.params.id).then((response) => {
+      this.subtask_output = response.data
+    })
   },
   methods: {
     task_data() {
       UserService.blenderTaskData(this.$route.params.id).then(
         (response) => {
-          console.log(response)
           this.task_output = response.data
         },
         (error) => {

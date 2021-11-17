@@ -15,6 +15,9 @@ class UserService {
   blenderSubtaskData(task_id) {
     return api.get("v1/subtask/" + task_id)
   }
+  blenderSubtaskResults(task_id) {
+    return api.get("v1/blender/subtask/results/" + task_id)
+  }
 }
 
 export default new UserService()

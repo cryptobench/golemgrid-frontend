@@ -293,7 +293,6 @@ export default {
       data.append("output", this.output) // add your file to form data
       data.append("frames", this.frames) // add your file to form data
       data.append("samples", this.samples) // add your file to form data
-      console.log(">> formData >> ", data)
       api
         .post("v1/submit/blender", data, {
           headers: {
@@ -301,7 +300,6 @@ export default {
           },
         })
         .then((res) => {
-          console.log(res.data.task_id)
           this.$router.push({ name: "taskinfo", params: { id: res.data.task_id } })
         })
         .catch((error) => {
