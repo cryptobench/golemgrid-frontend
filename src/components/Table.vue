@@ -71,6 +71,25 @@
         </div>
       </div>
     </div>
+    <div class="bg-white">
+      <div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+        <h2 class="text-xl font-bold text-gray-900">Output</h2>
+
+        <div class="mt-8 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-6 xl:gap-x-8">
+          <div v-for="result in images" :key="result">
+            <div class="relative">
+              <div class="relative w-full rounded-lg overflow-hidden">
+                <img :src="this.static + result.file" class="w-full h-full object-center object-cover" />
+              </div>
+              <div class="relative mt-4">
+                <h3 class="text-sm font-medium text-gray-900">output</h3>
+                <p class="mt-1 text-sm text-gray-500">test</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -81,18 +100,27 @@ export default {
     return {
       task_output: {},
       subtask_output: {},
+      images: {},
     }
   },
 
   created() {
+    this.static = process.env.VUE_APP_STATIC_BASE_URL
     UserService.blenderTaskData(this.$route.params.id).then((response) => {
       this.task_output = response.data
       if (response.data.status == "finished") {
+        UserService.blenderSubtaskResults(this.$route.params.id).then(
+          (response) => {
+            this.images = response.data
+          },
+          (error) => {
+            this.content = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+          }
+        )
         return
       } else {
         console.log(this.task_output.status)
-        this.interval2 = setInterval(() => this.task_data(), 2000)
-        this.interval2 = setInterval(() => this.subtask_data(), 2000)
+        this.interval = setInterval(() => this.gatherdata(), 2000)
       }
     })
     UserService.blenderSubtaskData(this.$route.params.id).then((response) => {
@@ -100,7 +128,15 @@ export default {
     })
   },
   methods: {
-    task_data() {
+    gatherdata() {
+      UserService.blenderSubtaskResults(this.$route.params.id).then(
+        (response) => {
+          this.images = response.data
+        },
+        (error) => {
+          this.content = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+        }
+      )
       UserService.blenderTaskData(this.$route.params.id).then(
         (response) => {
           this.task_output = response.data
@@ -109,8 +145,6 @@ export default {
           this.content = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
         }
       )
-    },
-    subtask_data() {
       UserService.blenderSubtaskData(this.$route.params.id).then(
         (response) => {
           this.subtask_output = response.data
