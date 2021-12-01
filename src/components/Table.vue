@@ -119,7 +119,6 @@ export default {
         )
         return
       } else {
-        console.log(this.task_output.status)
         this.interval = setInterval(() => this.gatherdata(), 2000)
       }
     })
@@ -128,7 +127,23 @@ export default {
     })
   },
   methods: {
-    gatherdata() {
+    looper() {
+      while (this.task_output.status != "finished") {
+        this.blenderSubtaskResults()
+        setTimeout(() => {
+          console.log("Waiting 1")
+        }, 2000)
+        this.blenderTaskData()
+        setTimeout(() => {
+          console.log("Waiting 2")
+        }, 2000)
+        this.blenderSubtaskResults()
+        setTimeout(() => {
+          console.log("Waiting 3")
+        }, 2000)
+      }
+    },
+    BlenderSubtaskResult() {
       UserService.blenderSubtaskResults(this.$route.params.id).then(
         (response) => {
           this.images = response.data
@@ -137,6 +152,8 @@ export default {
           this.content = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
         }
       )
+    },
+    BlenderTaskData() {
       UserService.blenderTaskData(this.$route.params.id).then(
         (response) => {
           this.task_output = response.data
@@ -145,6 +162,8 @@ export default {
           this.content = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
         }
       )
+    },
+    BlenderSubtaskResult() {
       UserService.blenderSubtaskData(this.$route.params.id).then(
         (response) => {
           this.subtask_output = response.data
