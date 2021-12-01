@@ -137,7 +137,7 @@ export default {
         setTimeout(() => {
           console.log("Waiting 2")
         }, 2000)
-        this.blenderSubtaskResults()
+        this.blenderSubtaskData()
         setTimeout(() => {
           console.log("Waiting 3")
         }, 2000)
@@ -163,7 +163,7 @@ export default {
         }
       )
     },
-    BlenderSubtaskResult() {
+    BlenderSubtaskData() {
       UserService.blenderSubtaskData(this.$route.params.id).then(
         (response) => {
           this.subtask_output = response.data
