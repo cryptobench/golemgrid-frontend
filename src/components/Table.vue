@@ -129,15 +129,15 @@ export default {
   methods: {
     looper() {
       while (this.task_output.status != "finished") {
-        this.blenderSubtaskResults()
+        this.BlenderSubtaskResults()
         setTimeout(() => {
           console.log("Waiting 1")
         }, 2000)
-        this.blenderTaskData()
+        this.BlenderTaskData()
         setTimeout(() => {
           console.log("Waiting 2")
         }, 2000)
-        this.blenderSubtaskData()
+        this.BlenderSubtaskData()
         setTimeout(() => {
           console.log("Waiting 3")
         }, 2000)
