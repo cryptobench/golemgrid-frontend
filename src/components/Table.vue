@@ -129,7 +129,7 @@ export default {
   methods: {
     looper() {
       while (this.task_output.status != "finished") {
-        this.BlenderSubtaskResults()
+        this.BlenderSubtaskResult()
         setTimeout(() => {
           console.log("Waiting 1")
         }, 2000)
