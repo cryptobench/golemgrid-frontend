@@ -119,7 +119,7 @@ export default {
         )
         return
       } else {
-        this.interval = setInterval(() => this.gatherdata(), 2000)
+        this.looper()
       }
     })
     UserService.blenderSubtaskData(this.$route.params.id).then((response) => {
