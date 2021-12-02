@@ -7,6 +7,7 @@ LATEST_TAG := ${REPO}:${GITHUB_SHA}
 
 build:
 	@docker build -t ${IMG} .
+	@docker build -t ${IMG_LATEST} .
 	@docker tag ${IMG} ${LATEST}
 	@docker tag ${IMG_LATEST} ${LATEST_TAG}
  
