@@ -3,7 +3,7 @@ REPO   := phillipjensen/golemgrid-frontend
 IMG   := golemgrid-frontend:${GITHUB_SHA}
 IMG_LATEST   := golemgrid-frontend:latest
 LATEST := ${REPO}:${GITHUB_SHA}
-LATEST_TAG := ${REPO}:${GITHUB_SHA}
+LATEST_TAG := ${REPO}:latest
 
 build:
 	@docker build -t ${IMG} .
