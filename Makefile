@@ -8,6 +8,7 @@ build:
 	@docker tag ${IMG} ${LATEST}
  
 push:
+	@docker push ${REPO}:latest
 	@docker push ${REPO}:${GITHUB_SHA}
  
 login:
