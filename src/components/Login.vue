@@ -205,8 +205,6 @@ export default {
   methods: {
     handleLogin() {
       this.loading = true
-      console.log(this.user)
-      console.log("USER ABOVE")
       this.$store.dispatch("auth/login", this.user).then(
         () => {
           this.$router.push("/")

@@ -26,7 +26,6 @@ const setup = (store) => {
         // Access Token was expired
         if (err.response.status === 401 && !originalConfig._retry) {
           originalConfig._retry = true
-
           try {
             const rs = await instance.post("api/token/refresh/", {
               refreshToken: TokenService.getLocalRefreshToken(),
@@ -39,8 +38,7 @@ const setup = (store) => {
 
             return instance(originalConfig)
           } catch (_error) {
-            this.$store.dispatch("auth/logout")
-            console.log("remove user")
+            store.dispatch("auth/logout")
             router.push({ name: "Login" })
             return Promise.reject(_error)
           }
