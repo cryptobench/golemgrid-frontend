@@ -44,121 +44,6 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-span-6 sm:col-span-2">
-                    <label for="resolution_width" class="block text-sm font-medium text-gray-700">Resolution Width</label>
-                    <input
-                      required
-                      type="number"
-                      name="resolution_width"
-                      id="resolution_width"
-                      v-model="resolutionx"
-                      autocomplete="resolution_width"
-                      class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                    />
-                  </div>
-
-                  <div class="col-span-6 sm:col-span-2">
-                    <label for="resolution_height" class="block text-sm font-medium text-gray-700">Resolution Height</label>
-                    <input
-                      required
-                      type="number"
-                      name="resolution_height"
-                      id="resolution_height"
-                      v-model="resolutiony"
-                      autocomplete="resolution_height"
-                      class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                    />
-                  </div>
-
-                  <div class="col-span-6 sm:col-span-1">
-                    <label for="samples" class="block text-sm font-medium text-gray-700">Samples</label>
-                    <input
-                      required
-                      type="number"
-                      name="samples"
-                      id="samples"
-                      v-model="samples"
-                      autocomplete="samples"
-                      class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                    />
-                  </div>
-
-                  <div class="col-span-6 sm:col-span-1">
-                    <label for="frames" class="block text-sm font-medium text-gray-700">Frames</label>
-                    <input
-                      required
-                      type="number"
-                      name="frames"
-                      id="frames"
-                      v-model="frames"
-                      autocomplete="frames"
-                      class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                    />
-                  </div>
-
-                  <div class="col-span-6 sm:col-span-1">
-                    <label for="format" class="block text-sm font-medium text-gray-700">Output Format</label>
-                    <select
-                      required
-                      id="format"
-                      name="format"
-                      autocomplete="format"
-                      v-model="output"
-                      class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    >
-                      <option>PNG</option>
-                      <option>EXIF</option>
-                    </select>
-                  </div>
-                  <div class="col-span-6 sm:col-span-6"></div>
-                  <div class="col-span-6 sm:col-span-1">
-                    <label for="borderleft" class="block text-sm font-medium text-gray-700">Border left</label>
-                    <input
-                      required
-                      type="number"
-                      name="borderleft"
-                      id="borderleft"
-                      v-model="borderleft"
-                      autocomplete="borderleft"
-                      class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                    />
-                  </div>
-                  <div class="col-span-6 sm:col-span-1">
-                    <label for="borderright" class="block text-sm font-medium text-gray-700">Border right</label>
-                    <input
-                      required
-                      type="number"
-                      name="borderright"
-                      id="borderright"
-                      v-model="borderright"
-                      autocomplete="borderright"
-                      class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                    />
-                  </div>
-                  <div class="col-span-6 sm:col-span-1">
-                    <label for="borderup" class="block text-sm font-medium text-gray-700">Border up</label>
-                    <input
-                      required
-                      type="number"
-                      name="borderup"
-                      id="borderup"
-                      v-model="borderup"
-                      autocomplete="borderup"
-                      class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                    />
-                  </div>
-                  <div class="col-span-6 sm:col-span-1">
-                    <label for="borderdown" class="block text-sm font-medium text-gray-700">Border down</label>
-                    <input
-                      required
-                      v-model="borderdown"
-                      type="number"
-                      name="borderdown"
-                      id="borderdown"
-                      autocomplete="borderdown"
-                      class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                    />
-                  </div>
                 </div>
               </div>
               <div class="col-span-6 sm:col-span-6">
@@ -261,38 +146,14 @@ export default {
   },
   data() {
     return {
-      options: [
-        { item: "PNG", name: "PNG" },
-        { item: "EXIF", name: "EXIF" },
-      ],
       file: "",
-      resolutionx: 200,
-      resolutiony: 200,
-      borderleft: 0,
-      borderright: 0,
-      borderup: 0,
-      borderdown: 0,
-      compositing: false,
-      output: "PNG",
-      frames: 1,
-      samples: 100,
     }
   },
   methods: {
     submitForm() {
       this.open = !this.open
       let data = new FormData() // creates a new FormData object
-      data.append("resolutionx", this.resolutionx) // add your file to form data
-      data.append("resolutiony", this.resolutiony) // add your file to form data
       data.append("scene_file", this.file) // add your file to form data
-      data.append("borderleft", this.borderleft) // add your file to form data
-      data.append("borderright", this.borderright) // add your file to form data
-      data.append("borderup", this.borderup) // add your file to form data
-      data.append("borderdown", this.borderdown) // add your file to form data
-      data.append("compositing", this.compositing) // add your file to form data
-      data.append("output", this.output) // add your file to form data
-      data.append("frames", this.frames) // add your file to form data
-      data.append("samples", this.samples) // add your file to form data
       api
         .post("v1/submit/blender", data, {
           headers: {
