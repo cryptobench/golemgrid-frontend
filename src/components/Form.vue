@@ -1,20 +1,98 @@
+<!--
+  This example requires Tailwind CSS v2.0+ 
+  
+  This example requires some changes to your config:
+  
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/aspect-ratio'),
+    ],
+  }
+  ```
+-->
 <template>
-  <div>
-    <div class="mt-20 sm:mt-4">
-      <div class="md:grid md:grid-cols-8 md:gap-6">
-        <div class="mt-5 md:mt-0 md:col-span-6 md:col-start-2 ">
+  <div class="bg-white">
+    <div class="max-w-2xl mx-auto py-16 px-4 sm:py-16 sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:gap-x-8">
+      <div class="lg:max-w-lg">
+        <div>
+          <h1 class="text-3xl font-extrabold tracking-tight text-golemblue sm:text-4xl">Render a blender task</h1>
+        </div>
+
+        <section aria-labelledby="information-heading" class="mt-4">
+          <h2 id="information-heading" class="sr-only">Product information</h2>
+
+          <div class="mt-4 space-y-6">
+            <p class="text-base text-gray-500">
+              Render your scenes with ease on GolemGrid. Just submit a .blend file with your settings prebaked into the file.
+
+              <br /><br />
+              Please note that using steps in your frames are <b>not</b> supported.
+            </p>
+          </div>
+
+          <RadioGroup class="mt-8" v-model="selected">
+            <RadioGroupLabel class="sr-only">
+              Server size
+            </RadioGroupLabel>
+            <div class="space-y-4">
+              <RadioGroupOption as="template" v-for="plan in plans" :key="plan.name" :value="plan" v-slot="{ checked, active }">
+                <div
+                  :class="[
+                    checked ? 'border-transparent' : 'border-gray-300',
+                    active ? 'ring-2 ring-indigo-500' : '',
+                    'relative block bg-white border rounded-lg shadow-sm px-6 py-4 cursor-pointer sm:flex sm:justify-between focus:outline-none',
+                  ]"
+                >
+                  <div class="flex items-center">
+                    <div class="text-sm">
+                      <RadioGroupLabel as="p" class="font-medium text-gray-900">
+                        {{ plan.name }}
+                      </RadioGroupLabel>
+                      <RadioGroupDescription as="div" class="text-gray-500">
+                        <p class="sm:inline">{{ plan.cpus }}</p>
+                        <span class="hidden sm:inline sm:mx-1" aria-hidden="true">&middot;</span>
+                        <p class="sm:inline">{{ plan.ram }} RAM</p>
+                        {{ " " }}
+                        <span class="hidden sm:inline sm:mx-1" aria-hidden="true">&middot;</span>
+                        {{ " " }}
+                        <p class="sm:inline">{{ plan.disk }}</p>
+                      </RadioGroupDescription>
+                    </div>
+                  </div>
+                  <RadioGroupDescription as="div" class="mt-2 flex text-sm sm:mt-0 sm:block sm:ml-4 sm:text-right">
+                    <div class="font-medium text-gray-900">{{ plan.price }}</div>
+                    <div class="ml-1 text-gray-500 sm:ml-0">/10 node</div>
+                  </RadioGroupDescription>
+                  <div
+                    :class="[
+                      active ? 'border' : 'border-2',
+                      checked ? 'border-indigo-500' : 'border-transparent',
+                      'absolute -inset-px rounded-lg pointer-events-none',
+                    ]"
+                    aria-hidden="true"
+                  />
+                </div>
+              </RadioGroupOption>
+            </div>
+          </RadioGroup>
+        </section>
+      </div>
+
+      <div class="mt-10 lg:mt-0 lg:col-start-2 lg:row-span-2 lg:self-center">
+        <div class="aspect-w-1 aspect-h-1 rounded-lg overflow-hidden">
           <form enctype="multipart/form-data" v-on:submit.prevent="submitForm">
             <div class="shadow overflow-hidden sm:rounded-md">
-              <div class="px-4 py-5 bg-white sm:p-6">
+              <div class="px-4 py-5  sm:p-6">
                 <div class="grid grid-cols-6 gap-6">
-                  <div class="col-span-6">
-                    <h1 class="text-2xl font-extrabold text-golemblue">Start a blender task</h1>
-                  </div>
                   <div class="col-span-6">
                     <label class="block text-sm font-medium text-gray-700">
                       Scene file
                     </label>
-                    <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                    <div class="mt-1 flex justify-center px-6 pt-36 pb-36 border-2 border-gray-300 border-dashed rounded-md">
                       <div v-if="file" class="mt-3"><b>Selected file:</b> {{ file ? file.name : "" }}</div>
                       <div v-else class="space-y-1 text-center">
                         <svg
@@ -34,7 +112,7 @@
                         <div class="flex text-sm text-gray-600">
                           <label
                             for="file"
-                            class="relative cursor-pointer bg-white rounded-md font-medium text-golemblue hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                            class="relative cursor-pointer  rounded-md font-medium text-golemblue hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                           >
                             <span>Upload a file</span>
                             <input required id="file" ref="file" name="file" type="file" v-on:change="handleFileUpload()" class="sr-only" />
@@ -50,10 +128,10 @@
                 </div>
               </div>
               <div class="col-span-6 sm:col-span-6">
-                <div class="px-4 py-3 bg-gray-50 sm:px-6">
+                <div class="px-4 py-3 sm:px-6">
                   <button
                     type="submit"
-                    class="w-full py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-golemblue hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    class="w-full bg-golemblue border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
                   >
                     Submit
                   </button>
@@ -130,7 +208,15 @@
 import api from "@/services/api"
 import { ref } from "vue"
 import { Dialog, DialogOverlay, DialogTitle, TransitionChild, TransitionRoot } from "@headlessui/vue"
+import { RadioGroup, RadioGroupDescription, RadioGroupLabel, RadioGroupOption } from "@headlessui/vue"
+
 import { CheckIcon } from "@heroicons/vue/outline"
+const plans = [
+  { name: "Hobby", ram: "4GB", cpus: "4 Cores", disk: "160 GB Storage", price: "$1" },
+  { name: "Startup", ram: "8GB", cpus: "10 Cores", disk: "256 GB SSD disk", price: "$2" },
+  { name: "Business", ram: "16GB", cpus: "48 Cores", disk: "512 GB SSD disk", price: "$6" },
+  { name: "Enterprise", ram: "32GB", cpus: "64 Cores", disk: "1024 GB SSD disk", price: "$10" },
+]
 export default {
   components: {
     Dialog,
@@ -139,12 +225,20 @@ export default {
     TransitionChild,
     TransitionRoot,
     CheckIcon,
+    RadioGroup,
+    RadioGroupDescription,
+    RadioGroupLabel,
+    RadioGroupOption,
   },
+
   setup() {
     const open = ref(false)
+    const selected = ref(plans[0])
 
     return {
       open,
+      plans,
+      selected,
     }
   },
   data() {
