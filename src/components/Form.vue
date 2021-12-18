@@ -8,6 +8,9 @@
               <div class="px-4 py-5 bg-white sm:p-6">
                 <div class="grid grid-cols-6 gap-6">
                   <div class="col-span-6">
+                    <h1 class="text-2xl font-extrabold text-golemblue">Start a blender task</h1>
+                  </div>
+                  <div class="col-span-6">
                     <label class="block text-sm font-medium text-gray-700">
                       Scene file
                     </label>
@@ -39,7 +42,7 @@
                           <p class="pl-1">or drag and drop</p>
                         </div>
                         <p class="text-xs text-gray-500">
-                          PNG, JPG, GIF up to 10MB
+                          .blend files only
                         </p>
                       </div>
                     </div>

@@ -13,19 +13,19 @@
               {{ task_output.status }}
             </span>
             <span
-              v-if="task_output.status == 'failed'"
+              v-if="task_output.status == 'Failed'"
               class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-red-100 text-red-800"
             >
               {{ task_output.status }}
             </span>
             <span
-              v-else-if="task_output.status == 'started'"
+              v-else-if="task_output.status == 'Started'"
               class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800"
             >
               {{ task_output.status }}
             </span>
             <span
-              v-else-if="task_output.status == 'finished'"
+              v-else-if="task_output.status == 'Finished'"
               class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800"
             >
               {{ task_output.status }}
@@ -57,7 +57,26 @@
                   {{ row.provider }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {{ row.status }}
+                  <span
+                    v-if="row.status == 'Finished'"
+                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+                  >
+                    {{ row.status }}
+                  </span>
+
+                  <span
+                    v-if="row.status == 'Computing'"
+                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800"
+                  >
+                    {{ row.status }}
+                  </span>
+
+                  <span
+                    v-if="row.status == 'Failed'"
+                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800"
+                  >
+                    {{ row.status }}
+                  </span>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {{ row.task_data }}
