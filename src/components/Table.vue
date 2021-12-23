@@ -3,7 +3,7 @@
   <div>
     <div class="mt-20 sm:mt-4">
       <div class="md:grid md:grid-cols-8 md:gap-6">
-        <div class="mt-5 md:mt-0 md:col-span-6 md:col-start-2 ">
+        <div class="mt-5 md:mt-0 md:col-span-2 md:col-start-2 ">
           <h3 class="ml-2 mt-2 text-lg leading-6 font-medium text-gray-900">
             Blender Task
             <span
@@ -33,6 +33,16 @@
           </h3>
           <p class="ml-2 mt-1 text-sm text-gray-500 truncate">{{ task_output.unique_id }}</p>
         </div>
+        <div v-if="task_output.status == 'Finished'" class="mt-5 md:mt-0 md:col-span-2 md:col-start-7">
+          <button
+            type="button"
+            v-on:click="download_result"
+            class="mt-2 -ml-6 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-golemblue hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Download Result
+            <DownloadIcon class="ml-3 -mr-1 h-5 w-5" aria-hidden="true" />
+          </button>
+        </div>
         <div class="mt-5 md:mt-0 md:col-span-6 md:col-start-2 ">
           <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
@@ -44,7 +54,7 @@
                   Status
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Task Data
+                  Frame
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Relationship
@@ -91,18 +101,20 @@
       </div>
     </div>
     <div class="bg-white">
-      <div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-        <h2 class="text-xl font-bold text-gray-900">Output</h2>
+      <div class="md:grid md:grid-cols-8 md:gap-6">
+        <div class="mt-16 md:col-span-2 md:col-start-2 ">
+          <h2 class="text-xl font-bold text-gray-900">Output</h2>
 
-        <div class="mt-8 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-6 xl:gap-x-8">
-          <div v-for="result in images" :key="result">
-            <div class="relative">
-              <div class="relative w-full rounded-lg overflow-hidden">
-                <img :src="this.static + result.file" class="w-full h-full object-center object-cover" />
-              </div>
-              <div class="relative mt-4">
-                <h3 class="text-sm font-medium text-gray-900">output</h3>
-                <p class="mt-1 text-sm text-gray-500">test</p>
+          <div class="mt-8 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-6 xl:gap-x-8">
+            <div v-for="result in images" :key="result">
+              <div class="relative">
+                <div class="relative w-full rounded-lg overflow-hidden">
+                  <img :src="this.static + result.file" class="w-full h-full object-center object-cover" />
+                </div>
+                <div class="relative mt-4">
+                  <h3 class="text-sm font-medium text-gray-900">output</h3>
+                  <p class="mt-1 text-sm text-gray-500">test</p>
+                </div>
               </div>
             </div>
           </div>
@@ -114,6 +126,8 @@
 
 <script>
 import UserService from "../services/user.service"
+import { DownloadIcon } from "@heroicons/vue/solid"
+
 export default {
   data() {
     return {
@@ -121,6 +135,9 @@ export default {
       subtask_output: {},
       images: {},
     }
+  },
+  components: {
+    DownloadIcon,
   },
 
   created() {
@@ -147,6 +164,9 @@ export default {
     })
   },
   methods: {
+    download_result() {
+      window.open(this.static + "media/" + this.$route.params.id + "/" + this.$route.params.id + ".zip", "_blank")
+    },
     gatherdata() {
       UserService.blenderSubtaskResults(this.$route.params.id).then(
         (response) => {
