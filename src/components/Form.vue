@@ -115,7 +115,16 @@
                             class="relative cursor-pointer  rounded-md font-medium text-golemblue hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                           >
                             <span>Upload a file</span>
-                            <input required id="file" ref="file" name="file" type="file" v-on:change="handleFileUpload()" class="sr-only" />
+                            <input
+                              accept=".blend"
+                              required
+                              id="file"
+                              ref="file"
+                              name="file"
+                              type="file"
+                              v-on:change="handleFileUpload()"
+                              class="sr-only"
+                            />
                           </label>
                           <p class="pl-1">or drag and drop</p>
                         </div>
