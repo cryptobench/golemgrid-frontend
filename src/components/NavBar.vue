@@ -64,6 +64,21 @@
           </Popover>
         </PopoverGroup>
       </div>
+      <div>
+        <div v-if="authenticated" class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+          <a @click="logOut" class="whitespace-nowrap text-base font-medium text-white hover:text-gray-400">Logout</a>
+        </div>
+        <div v-else class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+          <router-link class="whitespace-nowrap text-base font-medium text-white hover:text-gray-400" :to="{ name: 'Login' }"
+            >Login</router-link
+          >
+          <router-link
+            class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-700 hover:bg-indigo-700"
+            :to="{ name: 'Register' }"
+            >Sign up</router-link
+          >
+        </div>
+      </div>
     </div>
 
     <transition
@@ -139,6 +154,18 @@ export default {
     MenuIcon,
     XIcon,
   },
+  watch: {
+    $route() {
+      this.authenticated = this.$store.state.auth.status.loggedIn
+    },
+  },
+
+  methods: {
+    logOut() {
+      this.$store.dispatch("auth/logout")
+      this.$router.push({ name: "Login" })
+    },
+  },
   setup() {
     return {
       resources,
@@ -147,6 +174,7 @@ export default {
   data() {
     return {
       latest_exchange: {},
+      authenticated: this.$store.state.auth.status.loggedIn,
     }
   },
 }
