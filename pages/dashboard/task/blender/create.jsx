@@ -33,28 +33,19 @@ function classNames(...classes) {
 function Page() {
   const router = useRouter()
   const [open, setOpen] = useState(false)
-  const [enabled, setEnabled] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
 
   const submitForm = async (event) => {
     event.preventDefault()
     console.log(event)
     let data = new FormData()
-
-    data.append("name", event.target[1].value)
-    data.append("resolutionx", event.target[2].value)
-    data.append("resolutiony", event.target[3].value)
+    console.log(event.target[1].value)
     data.append("scene_file", event.target[0].files[0])
-    data.append("borderleft", event.target[7].value)
-    data.append("borderright", event.target[8].value)
-    data.append("borderup", event.target[9].value)
-    data.append("borderdown", event.target[10].value)
-    data.append("output", event.target[6].value)
-    data.append("frames", event.target[5].value)
-    data.append("samples", event.target[4].value)
+    data.append("name", event.target[1].value)
     const submit = await postFormData(process.env.NEXT_PUBLIC_API_BASE + "v1/submit/blender", "post", data)
     if (submit.status === 200) {
       let data = await submit.json()
-      router.push("/dashboard/task/blender/" + data.task_id)
+      router.push("/dashboard/task/blender/settings/" + data.task_id)
     }
   }
 
@@ -114,122 +105,6 @@ function Page() {
                       name="name"
                       id="name"
                       autoComplete="name"
-                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                    />
-                  </div>
-                  <div className="col-span-6 sm:col-span-2">
-                    <label htmlFor="resolution_width" className="block text-sm font-medium text-gray-700">
-                      Resolution Width
-                    </label>
-                    <input
-                      type="number"
-                      name="resolution_width"
-                      id="resolution_width"
-                      autoComplete="resolution_width"
-                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                    />
-                  </div>
-
-                  <div className="col-span-6 sm:col-span-2">
-                    <label htmlFor="resolution_height" className="block text-sm font-medium text-gray-700">
-                      Resolution Height
-                    </label>
-                    <input
-                      type="number"
-                      name="resolution_height"
-                      id="resolution_height"
-                      autoComplete="resolution_height"
-                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                    />
-                  </div>
-
-                  <div className="col-span-6 sm:col-span-1">
-                    <label htmlFor="samples" className="block text-sm font-medium text-gray-700">
-                      Samples
-                    </label>
-                    <input
-                      type="number"
-                      name="samples"
-                      id="samples"
-                      autoComplete="samples"
-                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                    />
-                  </div>
-
-                  <div className="col-span-6 sm:col-span-1">
-                    <label htmlFor="frames" className="block text-sm font-medium text-gray-700">
-                      Frames
-                    </label>
-                    <input
-                      type="number"
-                      name="frames"
-                      id="frames"
-                      autoComplete="frames"
-                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                    />
-                  </div>
-
-                  <div className="col-span-6 sm:col-span-1">
-                    <label htmlFor="format" className="block text-sm font-medium text-gray-700">
-                      Output Format
-                    </label>
-                    <select
-                      id="format"
-                      name="format"
-                      autoComplete="format"
-                      className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    >
-                      <option>PNG</option>
-                      <option>EXIF</option>
-                    </select>
-                  </div>
-
-                  <div className="col-span-6 sm:col-span-6"></div>
-                  <div className="col-span-6 sm:col-span-1">
-                    <label htmlFor="borderleft" className="block text-sm font-medium text-gray-700">
-                      Border left
-                    </label>
-                    <input
-                      type="number"
-                      name="borderleft"
-                      id="borderleft"
-                      autoComplete="borderleft"
-                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                    />
-                  </div>
-                  <div className="col-span-6 sm:col-span-1">
-                    <label htmlFor="borderright" className="block text-sm font-medium text-gray-700">
-                      Border right
-                    </label>
-                    <input
-                      type="number"
-                      name="borderright"
-                      id="borderright"
-                      autoComplete="borderright"
-                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                    />
-                  </div>
-                  <div className="col-span-6 sm:col-span-1">
-                    <label htmlFor="borderup" className="block text-sm font-medium text-gray-700">
-                      Border up
-                    </label>
-                    <input
-                      type="number"
-                      name="borderup"
-                      id="borderup"
-                      autoComplete="borderup"
-                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                    />
-                  </div>
-                  <div className="col-span-6 sm:col-span-1">
-                    <label htmlFor="borderdown" className="block text-sm font-medium text-gray-700">
-                      Border down
-                    </label>
-                    <input
-                      type="number"
-                      name="borderdown"
-                      id="borderdown"
-                      autoComplete="borderdown"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
